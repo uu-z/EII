@@ -22,6 +22,7 @@ var EII = function () {
         if (options) {
 
             this.options = options;
+
             this.fileinfo = (0, _utils.getFileInfo)(options.input);
             this.video = this.fileinfo.streams[1];
             this.format = this.fileinfo.format;
@@ -36,7 +37,9 @@ var EII = function () {
                 startSec = _options$startSec === undefined ? 0 : _options$startSec,
                 _options$time = _options.time,
                 time = _options$time === undefined ? 10 : _options$time,
-                outDir = _options.outDir;
+                outDir = _options.outDir,
+                _options$thread = _options.thread,
+                thread = _options$thread === undefined ? 2 : _options$thread;
 
             outDir && (0, _utils.checkDirExists)(outDir);
 
@@ -46,7 +49,11 @@ var EII = function () {
                 i += time;
             } while (i < this.format.duration);
 
-            this.extracter();
+            var j = 0;
+            do {
+                j++;
+                this.extracter();
+            } while (j < thread);
         }
     }, {
         key: 'extracter',
@@ -67,13 +74,14 @@ var EII = function () {
             var current = this.taskQueue[0];
 
             new Promise(function (resolve, reject) {
-
                 (0, _child_process.exec)('ffmpeg -i ' + input + ' -vf scale=' + height + ':-1 -ss ' + current + ' -t ' + time + ' -r ' + fps + ' -y ' + outDir + '/' + filename + current + '.gif ', function (err, stdout, stderr) {
                     if (err) {
+
                         _this.taskQueue.unshift(current);
                         reject(err);
                     }
                     if (stderr) {
+
                         _this.completeQueue.push(current);
                         console.log('\u8017\u65F6' + process.uptime() + 's, \u5DF2\u5B8C\u6210: ' + _this.completeQueue.length + ', \u8FD8\u5269\u4F59: ' + _this.taskQueue.length);
                         if (_this.taskQueue.length > 0) {
