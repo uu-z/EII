@@ -1,0 +1,28 @@
+{
+    "name": "eii",
+    "version": "1.0.1",
+    "description": "extract video to gif",
+    "main": "./dist/lib/index.js",
+    "author": "vaiii",
+    "license": "MIT",
+    "scripts": {
+        "start": "babel-node ./lib/index.js",
+        "build": "gulp build"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.18.0",
+        "babel-plugin-transform-flow-strip-types": "^6.21.0",
+        "babel-preset-env": "^1.1.4",
+        "eii": "^1.0.0",
+        "eslint": "^3.12.2",
+        "flow-bin": "^0.37.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
+        "gulp-chmod": "^2.0.0",
+        "gulp-named": "^1.0.0",
+        "jest": "^18.0.0"
+    },
+    "jest": {
+        "verbose": true
+    }
+}
