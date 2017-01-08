@@ -34,8 +34,8 @@ var EII = function () {
             var _options = this.options,
                 _options$startSec = _options.startSec,
                 startSec = _options$startSec === undefined ? 0 : _options$startSec,
-                _options$per = _options.per,
-                per = _options$per === undefined ? 10 : _options$per,
+                _options$time = _options.time,
+                time = _options$time === undefined ? 10 : _options$time,
                 outDir = _options.outDir;
 
             outDir && (0, _utils.checkDirExists)(outDir);
@@ -43,7 +43,7 @@ var EII = function () {
             var i = startSec;
             do {
                 this.taskQueue.push(i);
-                i += per;
+                i += time;
             } while (i < this.format.duration);
 
             this.extracter();
