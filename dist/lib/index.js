@@ -42,8 +42,8 @@ var EII = function () {
 
             var i = startSec;
             do {
-                i += per;
                 this.taskQueue.push(i);
+                i += per;
             } while (i < this.format.duration);
 
             this.extracter();
